@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+	<meta charset="UTF-8">
+	<title>Amazon Sales Prediction</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+		}
+		h1 {
+			text-align: center;
+		}
+		.container {
+            color: #000000;
+			display: flex;
+			justify-content: center;
+			margin-top: 50px;
+		}
+		form {
+			border: 2px solid rgba(255, 255, 255, 0.34);
+			padding: 20px;
+			width: 400px;
+			border-radius: 5px;
+		}
+		label {
+			display: inline-block;
+			width: 200px;
+			margin-bottom: 10px;
+		}
+		input[type="text"] {
+			padding: 5px;
+			border: 1px solid #ddd;
+			border-radius: 5px;
+			width: 200px;
+		}
+		input[type="submit"] {
+			padding: 5px 10px;
+			background-color: #008CBA;
+			color: #fff;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+		table {
+			border-collapse: collapse;
+			margin-top: 20px;
+			width: 100%;
+		}
+		th, td {
+			padding: 10px;
+			text-align: left;
+			border: 1px solid #ddd;
+		}
+	</style>
+</head>
+<body style="background-image: url('/static/images/bg5.jpg');">
+	<h1>Amazon Sales Prediction</h1>
+	<div class="container">
+		<form action="{{ url_for('predict') }}" method="post">
+			<label>Discounted Price:</label>
+			<input type="text" name="discounted_price" placeholder="Enter discounted price" required>
+			<br><br>
+			<label>Discount Percentage:</label>
+			<input type="text" name="discount_percentage" placeholder="Enter discount percentage" required>
+			<br><br>
+			<label>Rating:</label>
+			<input type="text" name="rating" placeholder="Enter rating" required>
+			<br><br>
+			<label>Rating Count:</label>
+			<input type="text" name="rating_count" placeholder="Enter rating count" required>
+			<br><br>
+			<input type="submit" value="Predict">
+		</form>
+	</div>
+	{% if prediction_text %}
+		<h2 style="text-align: center; margin-top: 50px;">Actual and Predicted Prices:</h2>
+		<table>
+			<thead>
+				<tr>
+					<th>Actual Price</th>
+					<th>Predicted Price</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>{{ prediction_text.actual_price }}</td>
+					<td>{{ prediction_text.predicted_price }}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	{% endif %}
+</body>
+</html>
